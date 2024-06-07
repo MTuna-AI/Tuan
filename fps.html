@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #fps {
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="fps">FPS: 0</div>
+
+    <script>
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+        let fpsDisplay = document.getElementById('fps');
+
+        function updateFPS() {
+            let now = performance.now();
+            frameCount++;
+            if (now >= lastFrameTime + 1000) {
+                let fps = (frameCount / ((now - lastFrameTime) / 1000)).toFixed(1);
+                fpsDisplay.textContent = 'FPS: ' + fps;
+                lastFrameTime = now;
+                frameCount = 0;
+            }
+            requestAnimationFrame(updateFPS);
+        }
+
+        updateFPS();
+    </script>
+</body>
+</html>
